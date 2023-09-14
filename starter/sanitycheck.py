@@ -29,6 +29,7 @@ def run_sanity_check(test_dir):
 
     test_functions_for_get = list(filter(lambda x: inspect.getsource(getattr(module,x)).find('.get(') != -1 , test_function_names))
     test_functions_for_post = list(filter(lambda x: inspect.getsource(getattr(module,x)).find('.post(') != -1, test_function_names))
+    
 
     print("\n============= Sanity Check Report ===========")
     SANITY_TEST_PASSING = True
@@ -131,4 +132,3 @@ if __name__ == "__main__":
     parser.add_argument('test_dir',metavar='test_dir',nargs='?',default='tests',help='Name of the directory that has test files.')
     args = parser.parse_args()
     run_sanity_check(args.test_dir)
-
