@@ -1,78 +1,102 @@
-"""
-Description: Helper functions to assist with the customer churn classification
-Author: V.Manousakis-Kokorakis
-Date: 13-09-2023
-"""
+# Put the code for your API here.
 
 from fastapi import FastAPI
+import pandas as pd    
+import numpy as np
 from pydantic import BaseModel
 import joblib
-import pandas as pd
-import numpy as np
-from utils import preprocess_data
+from starter.ml.data_process import process_data, cat_features
+from starter.ml.model import inference
 
-# Instantiate the FastAPI app.
+column = [
+        "age",
+        "workclass",
+        "fnlwgt",
+        "education",
+        "education_num",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "capital_gain",
+        "capital_loss",
+        "hours-per-week",
+        "native-country"]
+
+class InputData(BaseModel):
+    age: int
+    workclass: str
+    fnlgt: int
+    education: str
+    education_num: int
+    marital_status: str
+    occupation: str
+    relationship: str
+    race: str
+    sex: str
+    capital_gain: int
+    capital_loss: int
+    hours_per_week: int
+    native_country: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "age": 35,
+                "workclass": "Private",
+                "fnlgt": 77516,
+                "education": "HS-grad",
+                "education_num": 9,
+                "marital_status": "Divorced",
+                "occupation": "Handlers-cleaners",
+                "relationship": "Husband",
+                "race": "Black",
+                "sex": "Male",
+                "capital_gain": 0,
+                "capital_loss": 0,
+                "hours_per_week": 40,
+                "native_country": "United-States"
+            }
+        }
+
+# create app
 app = FastAPI()
+# load models
+model = joblib.load("model/model.pkl")
+encoder = joblib.load("model/encoder.pkl")
+lb = joblib.load("model/lb.pkl")
 
-
+#GET on the root giving a welcome message.
 @app.get("/")
-async def say_welcome():
-    """
-    Returns a greeting as a JSON response.
-    
-    Returns:
-    --------
-    dict
-        A dictionary containing the greeting.
-    """
-    return {"greeting": "Welcome!"}
+async def root():
+    return {"Hello world!"}
 
-
-class Register(BaseModel):
-    """
-    Class to define the data object with its components and their types.
-    """
-    age: int = 22
-    workclass: str = "Private"
-    fnlgt: int = 31387
-    education: str = "Bachelors"
-    education_num: int = 13
-    marital_status: str = "Married-civ-spouse"
-    occupation: str = "Adm-clerical"
-    relationship: str = "Own-child"
-    race: str = "Amer-Indian-Eskimo"
-    sex: str = "Female"
-    capital_gain: int = 2885
-    capital_loss: int = 0
-    hours_per_week: int = 25
-    native_country: str = "United-States"
-
-
-@app.post("/registers/")
-async def create_register(register: Register):
-    """
-    Loads a pre-trained model and encoder, preprocesses the incoming data
-    and predicts the outcome based on the model.
-
-    Parameters:
-    -----------
-    register : Register
-        An object of type Register that contains all the necessary features for the prediction.
-
-    Returns:
-    --------
-    dict : A dictionary of predictions
-    """
-    model = joblib.load('model/model.joblib')
-    encoder = joblib.load('model/encoder.joblib')
-
-    # Convert input to DataFrame
-    X = pd.DataFrame(register.dict(), index=[0])
-
-    # Preprocess the data
-    X = preprocess_data(X, encoder)
-
-    # Make predictions
-    preds = model.predict(X)
-
-    return {"salary": int(preds)}
+#POST that does model inference.
+@app.post("/predict")
+async def predict(input_data: InputData):
+    input = np.array([[
+                        input_data.age,
+                        input_data.workclass,
+                        input_data.fnlgt,
+                        input_data.education,
+                        input_data.education_num,
+                        input_data.marital_status,
+                        input_data.occupation,
+                        input_data.relationship,
+                        input_data.race,
+                        input_data.sex,
+                        input_data.capital_gain,
+                        input_data.capital_loss,
+                        input_data.hours_per_week,
+                        input_data.native_country
+                    ]])
+    data = pd.DataFrame(data=input, columns=column)
+    #Process the data
+    X, _, _, _ = process_data(
+                    data, categorical_features=cat_features, training=False, encoder=encoder, lb=lb
+                )
+    #Inference 
+    y = inference(model=model, X=X)
+    output = lb.inverse_transform(y)[0]
+    return output
