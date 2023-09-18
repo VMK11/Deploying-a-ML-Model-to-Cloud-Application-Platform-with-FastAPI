@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import RandomizedSearchCV
 import numpy as np
 
+
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
     """
@@ -37,7 +38,7 @@ def train_model(X_train, y_train):
 
     # Instantiate the RandomizedSearchCV object
     random_search = RandomizedSearchCV(
-        rf, 
+        rf,
         param_distributions=param_dist,
         n_iter=10,
         cv=3, 

@@ -1,14 +1,6 @@
-"""
-Description: Helper functions to assist with the customer churn classification
-Author: V.Manousakis-Kokorakis
-Date: 13-09-2023
-"""
-
-# Third-party imports
-import pytest
-import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+import pandas as pd 
 
 cat_features = [
     "workclass",
@@ -21,7 +13,6 @@ cat_features = [
     "native-country",
 ]
 
-
 def load_data(path):
     """load data
 
@@ -31,11 +22,13 @@ def load_data(path):
     Returns:
         data (dataframe): 
     """
-    # Read data
+    #Read data
     data = pd.read_csv(path, skipinitialspace=True)
-    # Drop NaN value
+    #Drop NaN value
     data = data.replace("?", None).dropna()
     return data
+
+
 
 
 def process_data(
