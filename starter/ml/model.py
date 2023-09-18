@@ -4,56 +4,76 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import RandomizedSearchCV
 import numpy as np
 
-
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
     """
-    Trains a machine learning model using RandomizedSearchCV for hyperparameter tuning
-    and returns the best model.
+    Trains a machine learning model and returns it.
 
-    Parameters
-    ----------
+    Inputs
+    ------
     X_train : np.array
         Training data.
     y_train : np.array
         Labels.
-
     Returns
     -------
-    best_model : RandomForestClassifier
-        Trained machine learning model with best hyperparameters.
+    model
+        Trained machine learning model.
     """
 
-    # Define the parameter grid
-    param_dist = {
-        'n_estimators': [50, 100, 150],
-        'max_depth': [None, 10, 20, 30],
-        'min_samples_split': [2, 5, 10],
-        'min_samples_leaf': [1, 2, 4],
-        'bootstrap': [True, False],
-    }
-
-    # Create the base model
     rf = RandomForestClassifier(random_state=0)
+    rf.fit(X_train, y_train)
+    return rf
 
-    # Instantiate the RandomizedSearchCV object
-    random_search = RandomizedSearchCV(
-        rf,
-        param_distributions=param_dist,
-        n_iter=10,
-        cv=3, 
-        verbose=1, 
-        random_state=0,
-        n_jobs=-1
-    )
+# # Optional: implement hyperparameter tuning.
+# def train_model(X_train, y_train):
+#     """
+#     Trains a machine learning model using RandomizedSearchCV for hyperparameter tuning
+#     and returns the best model.
 
-    # Perform hyperparameter search
-    random_search.fit(X_train, y_train)
+#     Parameters
+#     ----------
+#     X_train : np.array
+#         Training data.
+#     y_train : np.array
+#         Labels.
 
-    # Get the best model
-    best_model = random_search.best_estimator_
+#     Returns
+#     -------
+#     best_model : RandomForestClassifier
+#         Trained machine learning model with best hyperparameters.
+#     """
 
-    return best_model
+#     # Define the parameter grid
+#     param_dist = {
+#         'n_estimators': [50, 100, 150],
+#         'max_depth': [None, 10, 20, 30],
+#         'min_samples_split': [2, 5, 10],
+#         'min_samples_leaf': [1, 2, 4],
+#         'bootstrap': [True, False],
+#     }
+
+#     # Create the base model
+#     rf = RandomForestClassifier(random_state=0)
+
+#     # Instantiate the RandomizedSearchCV object
+#     random_search = RandomizedSearchCV(
+#         rf,
+#         param_distributions=param_dist,
+#         n_iter=10,
+#         cv=3, 
+#         verbose=1, 
+#         random_state=0,
+#         n_jobs=-1
+#     )
+
+#     # Perform hyperparameter search
+#     random_search.fit(X_train, y_train)
+
+#     # Get the best model
+#     best_model = random_search.best_estimator_
+
+#     return best_model
 
 
 def compute_model_metrics(y, preds):
