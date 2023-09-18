@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from pydantic import BaseModel
 import joblib
-from ml.data_process import process_data, cat_features
+from ml.data import process_data, cat_features
 from ml.model import inference
 
 column = [

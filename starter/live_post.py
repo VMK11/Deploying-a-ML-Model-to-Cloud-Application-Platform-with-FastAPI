@@ -6,10 +6,9 @@ Date: 13-09-2023
 
 # Standard library imports
 import requests
-import requests
 
 print("Starting requests POSTing on live API")
-URL = "https://model-serving-rer4.onrender.com/"
+URL = "https://model-serving-rer4.onrender.com/predict"
 data = {
         "age": 30,
         "workclass": "Private",
