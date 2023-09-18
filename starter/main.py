@@ -1,12 +1,10 @@
-# Put the code for your API here.
-
 from fastapi import FastAPI
 import pandas as pd    
 import numpy as np
 from pydantic import BaseModel
 import joblib
-from ml.data import process_data, cat_features
-from ml.model import inference
+from starter.ml.data_process import process_data, cat_features
+from starter.ml.model import inference
 
 column = [
         "age",
