@@ -1,3 +1,9 @@
+"""
+Description: Helper functions to assist with the customer churn classification
+Author: V.Manousakis-Kokorakis
+Date: 13-09-2023
+"""
+
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 import pandas as pd 
