@@ -15,8 +15,6 @@ from sklearn.model_selection import train_test_split
 from ml.data import load_data, process_data, slice_performance
 from ml.model import train_model, compute_model_metrics, inference
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
 
 cat_features = [
     "workclass",
@@ -46,22 +44,22 @@ X_test, y_test, _, _ = process_data(
 )
 
 # Train and evaluate the model
-logging.info("Starting training")
+print("Starting training")
 model = train_model(X_train, y_train)
 
-logging.info("Inference")
+print("Inference")
 y_pred = inference(model, X_test)
 
-logging.info("Evaluation")
+print("Evaluation")
 precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
-logging.info(f"Precision: {round(precision, 2)}, Recall: {round(recall, 2)}, FBeta: {round(fbeta, 2)}")
+print(f"Precision: {round(precision, 2)}, Recall: {round(recall, 2)}, FBeta: {round(fbeta, 2)}")
 
 # Evaluate performance on data slices
-logging.info("Calculating performance of the model on slices of the data")
+print("Calculating performance of the model on slices of the data")
 slice_performance(test, model, encoder, lb, compute_model_metrics, cat_features=cat_features)
 
 # Save the model and preprocessors
-logging.info("Saving model")
+print("Saving model")
 joblib.dump(model, 'model/model.pkl')
 joblib.dump(encoder, 'model/encoder.pkl')
 joblib.dump(lb, 'model/lb.pkl')
