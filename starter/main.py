@@ -63,9 +63,9 @@ class Input(BaseModel):
 
 app = FastAPI()
 
-model = joblib.load("model/model.pkl")
-encoder = joblib.load("model/encoder.pkl")
-label_binarizer = joblib.load("model/lb.pkl")
+model = joblib.load("starter/model/model.pkl")
+encoder = joblib.load("starter/model/encoder.pkl")
+label_binarizer = joblib.load("starter/model/lb.pkl")
 
 cat_features = [
     "workclass",
