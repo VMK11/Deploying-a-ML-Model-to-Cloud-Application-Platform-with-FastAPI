@@ -13,8 +13,8 @@ from fastapi.encoders import jsonable_encoder
 # Third-party imports
 from pydantic import BaseModel
 import pandas as pd
-from ml.data import process_data
-from ml.model import inference
+from starter.ml.data import process_data
+from starter.ml.model import inference
 
 logging.basicConfig(
     filename="server.log",
