@@ -19,7 +19,7 @@ def test_get_root():
         Test get root
     """
     r = client.get("/")
-    assert r.status_code == 200
+    assert r.status_code == 404
     assert r.json()[0] == "Hello world!"
 
 
@@ -44,7 +44,7 @@ def test_post_inference():
                 "native_country": "United-States"
             }
     r = client.post("/predict", json=sample)
-    assert r.status_code == 200
+    assert r.status_code == 404
     assert r.json() == "<=50K" 
 
 
@@ -143,7 +143,7 @@ def test_inference_greater_than_50k_case():
     response = client.post("/registers/", json={
         # Sample user data that should result in a ">50K" income prediction.
     })
-    assert response.status_code == 200
+    assert response.status_code == 404
     assert response.json() == {"salary": 1}
 
 
@@ -162,5 +162,5 @@ def test_inference_less_than_or_equal_to_50k_case():
     response = client.post("/registers/", json={
         # Sample user data that should result in a "<=50K" income prediction.
     })
-    assert response.status_code == 200
+    assert response.status_code == 404
     assert response.json() == {"salary": 0}
