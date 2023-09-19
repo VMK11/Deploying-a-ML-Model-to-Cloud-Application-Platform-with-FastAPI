@@ -61,9 +61,9 @@ class Input(BaseModel):
         }
 
 app = FastAPI()
-model_name = "./model.pkl"
-encoder_name = "./encoder.pkl"
-label_binarizer_name = './label_binarizer.pkl'
+model_name = "./model/model.pkl"
+encoder_name = "./model/encoder.pkl"
+label_binarizer_name = './model/label_binarizer.pkl'
 
 with open(model_name, 'rb') as f_p:
     model = pickle.load(f_p)
