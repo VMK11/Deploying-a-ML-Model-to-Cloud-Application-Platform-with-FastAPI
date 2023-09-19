@@ -8,8 +8,6 @@ Date: 13-09-2023
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import RandomizedSearchCV
-import numpy as np
-
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
