@@ -78,7 +78,7 @@ def test_inference(data):
     Returns:
         None. Asserts are used to validate the inference.
     """
-    model = joblib.load(r'./model/model.pkl')
+    model = joblib.load('./starter/model/model.pkl')
     train, test = train_test_split(data, test_size=0.3, random_state=0)
     # Process data
     X_train, y_train, encoder, lb = process_data(
