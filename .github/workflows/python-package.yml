@@ -1,13 +1,5 @@
-#!/bin/bash
 
-# Generate a unique name for the workflow
-workflow_name="dynamic-workflow-$(date +%s).yml"
-
-# Generate the workflow YAML content (you can customize this as needed)
-cat <<EOL > ".github/workflows/$workflow_name"
-
-
-name: Python application
+name: Python CICD
 
 on:
   push:
@@ -72,10 +64,3 @@ jobs:
         with:
           api-key: ${{ secrets.RENDER_TOKEN }}
           service-id: srv-cieqellph6etu3u8suu0
-
-EOL
-
-# Commit and push the new workflow
-git add ".github/workflows/$workflow_name"
-git commit -m "Add dynamic workflow"
-git push origin main  # replace "main" with the target branch name if different
