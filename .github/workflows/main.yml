@@ -29,17 +29,17 @@ jobs:
     #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
     #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     #     aws-region: us-east-2
-    - name: Configure DVC
-      run: |
-        git config --global user.email "thichhocchui1999@gmail.com"
-        git config --global user.name "dmtuan1409"
-        git rm -r --cached data/*
-        git commit -m "stop tracking data/*" 
-    - name: Push data to S3 using dvc
-      run: | 
-        dvc pull
-        dvc add data/*.csv
-        dvc push -r myremote
+    # - name: Configure DVC
+    #   run: |
+    #     git config --global user.email "thichhocchui1999@gmail.com"
+    #     git config --global user.name "dmtuan1409"
+    #     git rm -r --cached data/*
+    #     git commit -m "stop tracking data/*" 
+    # - name: Push data to S3 using dvc
+    #   run: | 
+    #     dvc pull
+    #     dvc add data/*.csv
+    #     dvc push -r myremote
     - name: Lint with flake8
       run: |
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
