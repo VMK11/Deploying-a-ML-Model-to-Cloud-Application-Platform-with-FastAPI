@@ -5,7 +5,7 @@ workflow_name="dynamic-workflow-$(date +%s).yml"
 
 # Generate the workflow YAML content (you can customize this as needed)
 cat <<EOL > ".github/workflows/$workflow_name"
-name: Dynamic Workflow
+
 
 name: Python application
 
