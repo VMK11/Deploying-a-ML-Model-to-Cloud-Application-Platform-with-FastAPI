@@ -4,14 +4,9 @@ Author: V.Manousakis-Kokorakis
 Date: 13-09-2023
 """
 
-# Standard library imports
-import sys
-
 # Third-party imports
 import pytest
 import joblib
-import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
 # Application-specific imports
