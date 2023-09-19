@@ -5,7 +5,7 @@ Date: 13-09-2023
 """
 
 import logging
-
+import joblib
 from fastapi import FastAPI, HTTPException
 from fastapi.encoders import jsonable_encoder
 
@@ -61,18 +61,10 @@ class Input(BaseModel):
         }
 
 app = FastAPI()
-model_name = "./model/model.pkl"
-encoder_name = "./model/encoder.pkl"
-label_binarizer_name = './model/label_binarizer.pkl'
 
-with open(model_name, 'rb') as f_p:
-    model = pickle.load(f_p)
-
-with open(encoder_name, 'rb') as f_p:
-    loaded_encoder = pickle.load(f_p)
-
-with open(label_binarizer_name, 'rb') as f_p:
-    label_binarizer = pickle.load(f_p)
+model = joblib.load("model/model.pkl")
+encoder = joblib.load("model/encoder.pkl")
+lb = joblib.load("model/lb.pkl")
 
 cat_features = [
     "workclass",
