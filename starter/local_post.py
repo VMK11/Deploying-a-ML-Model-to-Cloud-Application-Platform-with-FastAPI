@@ -48,7 +48,7 @@ def test_get():
     r = client.get("/")
     print(r.json())
     assert r.status_code == 200
-    assert r.json() == {"fetch": "Welcome!"}
+    assert r.json() == {"greeting": "Hello world!"}
 
 
 def test_post_query():

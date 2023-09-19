@@ -80,7 +80,7 @@ cat_features = [
 
 @app.get("/")
 async def get_welcome():
-    return {"fetch": "Welcome!"}
+    return {"greeting": "Hello world!"}
 
 @app.post("/data/")
 async def inference_data(data: Input):
