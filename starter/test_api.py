@@ -16,39 +16,96 @@ from main import app  # Import our FastAPI app from main.py.
 client = TestClient(app)
 
 
-def test_say_welcome():
+def test_get_root():
     """
-    Description:
-        Test the root endpoint to ensure it returns a 200 status code 
-        and the expected greeting message.
-    
-    Parameters: None
-    
-    Returns:
-        None. Asserts are used to validate responses.
+        Test get root
     """
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"greeting": "Hello world!"}
+    r = client.get("/")
+    assert r.status_code == 200
+    assert r.json()[0] == "Hello world!"
 
 
 def test_post_inference():
     """
-    Description:
-        Test the model inference endpoint with a sample data payload.
-        Expect a 200 status code and an income prediction of "<=50K".
-    
-    Parameters: None
-    
-    Returns:
-        None. Asserts are used to validate responses.
+        test_model inference
     """
     sample = {
-        # Sample user data for model inference.
-    }
-    response = client.post("/predict", json=sample)
-    assert response.status_code == 200
-    assert response.json() == "<=50K"
+                "age": 35,
+                "workclass": "Private",
+                "fnlgt": 77516,
+                "education": "HS-grad",
+                "education_num": 9,
+                "marital_status": "Divorced",
+                "occupation": "Handlers-cleaners",
+                "relationship": "Husband",
+                "race": "Black",
+                "sex": "Male",
+                "capital_gain": 0,
+                "capital_loss": 0,
+                "hours_per_week": 40,
+                "native_country": "United-States"
+            }
+    r = client.post("/predict", json=sample)
+    assert r.status_code == 200
+    assert r.json() == "<=50K" 
+
+
+def test_post_inference_false_query():
+    """
+        test_model inference with false query
+    """
+    sample = {
+                "age": 35,
+                "workclass": "Private",
+                "fnlgt": 77516,
+                "education": "HS-grad",
+                "education_num": 9,
+                "marital_status": "Divorced",
+                "occupation": "Handlers-cleaners",
+                "relationship": "Husband",
+                "race": "Black",
+                "sex": "Male"
+            }
+    r = client.post("/predict", json=sample)
+    assert 'capital_gain' not in r.json()
+    assert 'capital_loss' not in r.json()
+    assert 'hours_per_week' not in r.json()
+    assert 'native_country' not in r.json()
+
+
+# def test_say_welcome():
+#     """
+#     Description:
+#         Test the root endpoint to ensure it returns a 200 status code 
+#         and the expected greeting message.
+    
+#     Parameters: None
+    
+#     Returns:
+#         None. Asserts are used to validate responses.
+#     """
+#     response = client.get("/")
+#     assert response.status_code == 200
+#     assert response.json() == {"greeting": "Hello world!"}
+
+
+# def test_post_inference():
+#     """
+#     Description:
+#         Test the model inference endpoint with a sample data payload.
+#         Expect a 200 status code and an income prediction of "<=50K".
+    
+#     Parameters: None
+    
+#     Returns:
+#         None. Asserts are used to validate responses.
+#     """
+#     sample = {
+#         # Sample user data for model inference.
+#     }
+#     response = client.post("/predict", json=sample)
+#     assert response.status_code == 200
+#     assert response.json() == "<=50K"
 
 
 def test_post_inference_false_query():
