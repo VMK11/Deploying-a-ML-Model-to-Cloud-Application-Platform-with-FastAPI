@@ -4,6 +4,7 @@ Author: V.Manousakis-Kokorakis
 Date: 13-09-2023
 """
 
+# Standard library imports
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 import pandas as pd 
@@ -33,8 +34,6 @@ def load_data(path):
     #Drop NaN value
     data = data.replace("?", None).dropna()
     return data
-
-
 
 
 def process_data(
