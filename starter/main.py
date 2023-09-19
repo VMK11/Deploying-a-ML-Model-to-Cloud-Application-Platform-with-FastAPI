@@ -64,7 +64,7 @@ app = FastAPI()
 
 model = joblib.load("model/model.pkl")
 encoder = joblib.load("model/encoder.pkl")
-lb = joblib.load("model/lb.pkl")
+label_binarizer = joblib.load("model/lb.pkl")
 
 cat_features = [
     "workclass",
@@ -92,7 +92,7 @@ async def inference_data(data: Input):
     #     # Proces the test data with the process_data function.
         x_test, _, _, _ = process_data(
             test, categorical_features=cat_features, label=None, training=False,
-            encoder = loaded_encoder, lb=label_binarizer
+            encoder = encoder, lb=label_binarizer
         )
 
         preds = inference(model, x_test)
