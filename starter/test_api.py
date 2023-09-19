@@ -6,6 +6,7 @@ Date: 13-09-2023
 
 # Third-party imports
 from fastapi.testclient import TestClient
+import json
 
 # Application-specific imports
 from starter.main import app  # Import our FastAPI app from main.py.
@@ -51,3 +52,24 @@ def test_say_welcome():
     assert response.status_code == 200
     assert response.json() == {"greeting": "Hello world!"}
 
+def test_post_malformed():
+    data = {
+        "age": -5,
+        "workclass": "Private",
+        "fnlgt": 77516,
+        "education": "Bachelors",
+        "education_num": 13,
+        "marital_status": "Married-civ-spouse",
+        "occupation": "Adm-clerical",
+        "relationship": "Husband",
+        "race": "White",
+        "sex": "Male",
+        "capital_gain": 0,
+        "capital_loss": 0,
+        "hours_per_week": 40,
+        "native_country": "United-States"}
+
+    resp = client.post("/data/", content=json.dumps(data))
+
+    assert resp.status_code == 400
+    assert resp.json() == {"detail": "Age needs to be above 0."}
