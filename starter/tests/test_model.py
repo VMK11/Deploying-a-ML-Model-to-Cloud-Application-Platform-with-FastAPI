@@ -15,8 +15,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
 # Application-specific imports
-from ml.data import load_data, process_data, cat_features
-from ml.model import inference
+from starter.data import process_data, load_data, cat_features
+from starter.model import inference
 
 
 @pytest.fixture(scope="module")

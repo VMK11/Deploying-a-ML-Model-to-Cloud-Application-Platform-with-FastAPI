@@ -54,15 +54,15 @@ def test_get():
 def test_post_query():
     """
     Test the POST request for the URL "/data/".
-    
+
     This function:
     - Sends a POST request to the URL "/data/" with JSON payload `data`
     - Checks if the status code is 200
-    
+
     Example:
         >>> test_post_query()
         Should print the JSON output and pass the assertions.
-    
+
     Notes:
         - Uses a test client object named `client`.
         - The variable `data` should contain the JSON payload to be sent in the POST request.
