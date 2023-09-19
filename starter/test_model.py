@@ -24,7 +24,7 @@ def data():
     Returns:
         pandas.DataFrame: Loaded data from the census CSV file.
     """
-    datapath = "./data/census.csv"
+    datapath = "./starter/data/census.csv"
     return load_data(datapath)
 
 
