@@ -12,8 +12,8 @@ from sklearn.model_selection import train_test_split
 import sys
 sys.path.append('../')
 # Application-specific imports
-from starter.ml.data import process_data, load_data, cat_features
-from starter.ml.model import inference
+from ml.data import process_data, load_data, cat_features
+from ml.model import inference
 
 @pytest.fixture(scope="module")
 def data():
