@@ -9,8 +9,7 @@ from fastapi.testclient import TestClient
 
 # Application-specific imports
 # from main import app  # Import our FastAPI app from main.py.
-import sys
-sys.path.append('../')
+
 from main import app  # Import our FastAPI app from main.py.
 
 # Instantiate a test client with our FastAPI app.
