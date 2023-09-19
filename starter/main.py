@@ -101,7 +101,7 @@ async def inference_data(data: Input):
         logger.info("Inference successful: {}".format(salary))
 
         return salary
-    
+
     except Exception as e:
         logger.error("An error occurred: {}".format(e))
         raise

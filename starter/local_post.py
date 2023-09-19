@@ -29,6 +29,22 @@ data = {
 
 
 def test_get():
+    """
+    Test the GET request for the root URL ("/").
+    
+    This function:
+    - Sends a GET request to the root URL ("/")
+    - Checks if the status code is 200
+    - Checks if the JSON response matches the expected output
+    
+    Example:
+        >>> test_get()
+        Should print the JSON output and pass the assertions.
+    
+    Notes:
+        - Uses a test client object named `client`.
+        - Prints the JSON response to stdout.
+    """
     r = client.get("/")
     print(r.json())
     assert r.status_code == 200
@@ -36,9 +52,26 @@ def test_get():
 
 
 def test_post_query():
+    """
+    Test the POST request for the URL "/data/".
+    
+    This function:
+    - Sends a POST request to the URL "/data/" with JSON payload `data`
+    - Checks if the status code is 200
+    
+    Example:
+        >>> test_post_query()
+        Should print the JSON output and pass the assertions.
+    
+    Notes:
+        - Uses a test client object named `client`.
+        - The variable `data` should contain the JSON payload to be sent in the POST request.
+        - Prints the JSON response to stdout.
+    """
     r = client.post("/data/", json=data)
     print(r.json())
     assert r.status_code == 200
 
+
 test_get()
-test_post_query()ß
+test_post_query()
