@@ -12,8 +12,8 @@ import joblib
 from sklearn.model_selection import train_test_split
 
 # Application-specific imports
-from ml.data import load_data, process_data, slice_performance
-from ml.model import train_model, compute_model_metrics, inference
+from data import load_data, process_data, slice_performance
+from model import train_model, compute_model_metrics, inference
 
 
 cat_features = [
@@ -60,6 +60,6 @@ slice_performance(test, model, encoder, lb, compute_model_metrics, cat_features=
 
 # Save the model and preprocessors
 print("Saving model")
-joblib.dump(model, './model/model.pkl')
-joblib.dump(encoder, './model/encoder.pkl')
-joblib.dump(lb, './model/lb.pkl')
+joblib.dump(model, './starter/model/model.pkl')
+joblib.dump(encoder, './starter/model/encoder.pkl')
+joblib.dump(lb, './starter/model/lb.pkl')
