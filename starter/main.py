@@ -218,9 +218,9 @@ class InputData(BaseModel):
 app = FastAPI()
 
 # load models
-model = joblib.load("starter/model/model.pkl")
-encoder = joblib.load("starter/model/encoder.pkl")
-label_binarizer = joblib.load("starter/model/lb.pkl")
+model = joblib.load("/model/model.pkl")
+encoder = joblib.load("/model/encoder.pkl")
+label_binarizer = joblib.load("/model/lb.pkl")
 
 #GET on the root giving a welcome message.
 @app.get("/")
