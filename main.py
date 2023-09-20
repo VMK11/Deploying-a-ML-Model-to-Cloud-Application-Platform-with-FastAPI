@@ -165,7 +165,7 @@ from starter.ml.model import inference
 column = [
         "age",
         "workclass",
-        "fnlwgt",
+        "fnlgt",
         "education",
         "education_num",
         "marital-status",
