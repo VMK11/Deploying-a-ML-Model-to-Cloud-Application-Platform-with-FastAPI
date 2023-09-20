@@ -27,6 +27,7 @@ cat_features = [
     "native-country",
 ]
 
+
 # Load the data
 data = load_data(path='./starter/data/census.csv')
 
