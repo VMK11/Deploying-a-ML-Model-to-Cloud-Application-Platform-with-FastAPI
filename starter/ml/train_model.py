@@ -60,6 +60,6 @@ slice_performance(test, model, encoder, lb, compute_model_metrics, cat_features=
 
 # Save the model and preprocessors
 print("Saving model")
-joblib.dump(model, './starter/model/model.pkl')
-joblib.dump(encoder, './starter/model/encoder.pkl')
-joblib.dump(lb, './starter/model/lb.pkl')
+joblib.dump(model, './model/model.pkl')
+joblib.dump(encoder, './model/encoder.pkl')
+joblib.dump(lb, './model/lb.pkl')
