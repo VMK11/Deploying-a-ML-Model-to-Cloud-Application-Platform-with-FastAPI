@@ -28,7 +28,7 @@ cat_features = [
 ]
 
 # Load the data
-data = load_data(path='data/census.csv')
+data = load_data(path='./starter/data/census.csv')
 
 # Use train-test split (consider K-fold cross-validation for enhancement)
 train, test = train_test_split(data, test_size=0.20)
@@ -60,6 +60,6 @@ slice_performance(test, model, encoder, lb, compute_model_metrics, cat_features=
 
 # Save the model and preprocessors
 print("Saving model")
-joblib.dump(model, 'model/model.pkl')
-joblib.dump(encoder, 'model/encoder.pkl')
-joblib.dump(lb, 'model/lb.pkl')
+joblib.dump(model, './starter/model/model.pkl')
+joblib.dump(encoder, './starter/model/encoder.pkl')
+joblib.dump(lb, './starter/model/lb.pkl')
