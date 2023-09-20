@@ -35,29 +35,31 @@ def test_post_inference_false_query():
     assert 'hours_per_week' not in r.json()
     assert 'native_country' not in r.json()
 
-def test_post_inference():
+def test_predict_happy_case_1():
     """
-        test_model inference
+        Test model predict with happy case <= 50K
     """
-    sample = {
-                "age": 35,
+    data_test = {
+                "age": 30,
                 "workclass": "Private",
-                "fnlgt": 77516,
-                "education": "HS-grad",
-                "education_num": 9,
-                "marital_status": "Divorced",
-                "occupation": "Handlers-cleaners",
+                "fnlgt": 59496,
+                "education": "Bachelors",
+                "education_num": 13,
+                "marital_status": "Married-civ-spouse",
+                "occupation": "Sales",
                 "relationship": "Husband",
-                "race": "Black",
+                "race": "White",
                 "sex": "Male",
-                "capital_gain": 0,
+                "capital_gain": 2407,
                 "capital_loss": 0,
                 "hours_per_week": 40,
                 "native_country": "United-States"
             }
-    r = client.post("/predict", json=sample)
-    assert r.status_code == 404
-    assert r.json() == "<=50K" 
+    respone = client.post('/predict', json=data_test)
+    # Check response code
+    assert respone.status_code == 200
+    # Check response predict results of the model
+    assert respone.json() == "<=50K" 
 
 def test_say_welcome():
     """
