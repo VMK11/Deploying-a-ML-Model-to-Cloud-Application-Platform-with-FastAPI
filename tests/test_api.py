@@ -6,10 +6,9 @@ Date: 13-09-2023
 
 # Third-party imports
 from fastapi.testclient import TestClient
-import json
 
 # Application-specific imports
-from starter.main import app  # Import our FastAPI app from main.py.
+from main import app  # Import our FastAPI app from main.py.
 
 # Instantiate a test client with our FastAPI app.
 client = TestClient(app)
@@ -36,6 +35,29 @@ def test_post_inference_false_query():
     assert 'hours_per_week' not in r.json()
     assert 'native_country' not in r.json()
 
+def test_post_inference():
+    """
+        test_model inference
+    """
+    sample = {
+                "age": 35,
+                "workclass": "Private",
+                "fnlgt": 77516,
+                "education": "HS-grad",
+                "education_num": 9,
+                "marital_status": "Divorced",
+                "occupation": "Handlers-cleaners",
+                "relationship": "Husband",
+                "race": "Black",
+                "sex": "Male",
+                "capital_gain": 0,
+                "capital_loss": 0,
+                "hours_per_week": 40,
+                "native_country": "United-States"
+            }
+    r = client.post("/predict", json=sample)
+    assert r.status_code == 200
+    assert r.json() == "<=50K" 
 
 def test_say_welcome():
     """
