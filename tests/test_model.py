@@ -8,8 +8,6 @@ Date: 13-09-2023
 import pytest
 import joblib
 from sklearn.model_selection import train_test_split
-import sys
-sys.path.append('../')
 # Application-specific imports
 from starter.ml.data import process_data, load_data, cat_features
 from starter.ml.model import inference
