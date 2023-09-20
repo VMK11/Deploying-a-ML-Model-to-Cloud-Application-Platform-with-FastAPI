@@ -56,7 +56,7 @@ def test_post_inference():
                 "native_country": "United-States"
             }
     r = client.post("/predict", json=sample)
-    assert r.status_code == 400
+    assert r.status_code == 404
     assert r.json() == "<=50K" 
 
 def test_say_welcome():
