@@ -159,8 +159,8 @@ import pandas as pd
 import numpy as np
 from pydantic import BaseModel
 import joblib
-from starter.ml.data import process_data, cat_features
-from starter.ml.model import inference
+from ml.data import process_data, cat_features
+from ml.model import inference
 
 column = [
         "age",
