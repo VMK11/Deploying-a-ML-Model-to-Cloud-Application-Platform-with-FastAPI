@@ -7,8 +7,10 @@ Date: 13-09-2023
 # Third-party imports
 from fastapi.testclient import TestClient
 
+
+
 # Application-specific imports
-from .. main import app  # Import our FastAPI app from main.py.
+from main import app  # Import our FastAPI app from main.py.
 
 # Instantiate a test client with our FastAPI app.
 client = TestClient(app)
