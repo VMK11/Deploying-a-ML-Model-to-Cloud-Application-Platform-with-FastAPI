@@ -42,20 +42,20 @@ def test_post_inference():
         test_model inference
     """
     sample = {
-                "age": 35,
-                "workclass": "Private",
-                "fnlgt": 77516,
-                "education": "HS-grad",
-                "education_num": 9,
-                "marital_status": "Divorced",
-                "occupation": "Handlers-cleaners",
-                "relationship": "Husband",
-                "race": "Black",
-                "sex": "Male",
-                "capital_gain": 0,
-                "capital_loss": 0,
-                "hours_per_week": 40,
-                "native_country": "United-States"
+            "age": 39,
+            "workclass": "State-gov",
+            "fnlgt": 77516,
+            "education": "Bachelors",
+            "education_num": 13,
+            "marital_status": "Never-married",
+            "occupation": "Adm-clerical",
+            "relationship": "Not-in-family",
+            "race": "White",
+            "sex": "Male",
+            "capital_gain": 2174,
+            "capital_loss": 0,
+            "hours_per_week": 40,
+            "native_country": "United-States"
             }
     response = client.post("/predict", json=sample)
     print(response)
