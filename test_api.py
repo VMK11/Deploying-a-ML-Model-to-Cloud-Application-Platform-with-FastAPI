@@ -57,7 +57,7 @@ def test_post_inference():
             "hours_per_week": 40,
             "native_country": "United-States"
             }
-    response = client.post("/predict", json=sample)
+    response = client.post("/inference", json=sample)
     print(response)
     assert response.status_code == 200
     assert response.json() == "<=50K" 
