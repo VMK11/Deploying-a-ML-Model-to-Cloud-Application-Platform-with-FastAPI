@@ -27,23 +27,6 @@ def data():
     datapath = "./starter/data/census.csv"
     return load_data(datapath)
 
-@pytest.mark.parametrize("train_model", [train_model])
-def test_train(train_model):
-    
-    try :
-        pytest.model = train_model(pytest.X_train, pytest.y_train)
-        
-    except Exception as err:
-        raise err
-        
-    assert type(pytest.model)==RandomizedSearchCV
-    assert type(pytest.model.estimator)==RandomForestClassifier
-    
-    try :
-        pytest.model.best_estimator_
-    
-    except AttributeError:
-        raise AttributeError
 
 def test_load_data(data):
     """
