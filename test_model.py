@@ -9,6 +9,7 @@ import pytest
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import RandomizedSearchCV
+import joblib
 # Application-specific imports
 from starter.ml.data import process_data, load_data, cat_features
 from starter.ml.model import inference, train_model, compute_model_metrics
@@ -66,3 +67,17 @@ def test_process_data(data):
     assert len(X_test) == len(y_test)
     assert len(X_train) + len(X_test) == len(data)
 
+def test_model_output(data):
+    """
+        Test the model inference after training
+    """
+    model = joblib.load(MODEL_PATH + "model.pkl")
+    train, test = train_test_split(data, test_size=0.20)
+    X_train, y_train, encoder, lb = process_data(
+        train, categorical_features=cat_features, label="salary", training=True
+    )
+    X_test, y_test, _, _ = process_data(
+        test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+    )
+    y_pred = inference(model, X_test)
+    assert len(y_test) == len(y_pred)
