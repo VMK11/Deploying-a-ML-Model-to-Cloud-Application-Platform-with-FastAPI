@@ -121,33 +121,65 @@ def test_predict_error_case():
 
 def test_predict_above_50k():
     """
-        Test model predict with happy case >= 50K
+    Test the model's prediction endpoint for a specific >50k scanrio.
+    
+    This test sends a request with a predefined dataset representing an individual 
+    with attributes that, based on the underlying model, are expected to yield a 
+    prediction result of ">50K". 
+    
+    Attributes:
+        data_test (dict): The test data used for the prediction request. Represents 
+                          an individual with a certain set of socio-economic attributes.
+        respone (Response): The server's response to the POST request.
+
+    Assertions:
+        1. The response status code is 200, indicating a successful request.
+        2. The returned prediction from the model is ">50K".
+
+    Raises:
+        AssertionError: If any of the assertions fail.
     """
     data_test = {
-                "age": 32,
-                "workclass": "Private",
-                "fnlgt": 29933,
-                "education": "Bachelors",
-                "education_num": 13,
-                "marital_status": "Married-civ-spouse",
-                "occupation": "Handlers-cleaners",
-                "relationship": "Husband",
-                "race": "White",
-                "sex": "Male",
-                "capital_gain": 0,
-                "capital_loss": 0,
-                "hours_per_week": 50,
-                "native_country": "United-States"
-            }
+        "age": 32,
+        "workclass": "Private",
+        "fnlgt": 29933,
+        "education": "Bachelors",
+        "education_num": 13,
+        "marital_status": "Married-civ-spouse",
+        "occupation": "Handlers-cleaners",
+        "relationship": "Husband",
+        "race": "White",
+        "sex": "Male",
+        "capital_gain": 0,
+        "capital_loss": 0,
+        "hours_per_week": 50,
+        "native_country": "United-States"
+    }
     respone = client.post('/predict', json=data_test)
     # Check response code
     assert respone.status_code == 200
     # Check response predict results of the model
     assert respone.json() == ">50K"
 
-def test_predict_below_50k():
+def test_predict_below_equal_50k():
     """
-        Test model predict with happy case <= 50K
+    Test the model's prediction endpoint for a specific <=50k scanrio.
+    
+    This test sends a request with a predefined dataset representing an individual 
+    with attributes that, based on the underlying model, are expected to yield a 
+    prediction result of "<=50K". 
+    
+    Attributes:
+        data_test (dict): The test data used for the prediction request. Represents 
+                          an individual with a certain set of socio-economic attributes.
+        respone (Response): The server's response to the POST request.
+
+    Assertions:
+        1. The response status code is 200, indicating a successful request.
+        2. The returned prediction from the model is "<=50K".
+
+    Raises:
+        AssertionError: If any of the assertions fail.
     """
     data_test = {
                 "age": 30,
