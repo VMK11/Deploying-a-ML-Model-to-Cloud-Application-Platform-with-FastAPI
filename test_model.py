@@ -70,32 +70,16 @@ def test_process_data(data):
 
 def test_model_output(data):
     """
-    Test the model's inference after training on given data.
-
-    Parameters:
-    - data (DataFrame): The dataset used for testing the model's performance. It is expected to contain both
-                        the features and the target variable.
-
-    Raises:
-    - AssertionError: If the lengths of the predicted and true labels do not match.
-
-    Note:
-    - Assumes the presence of the following globally defined variables: cat_features, process_data, and inference.
-    - Expects that a model has been previously trained and saved to the path: "./starter/model/model.pkl".
+        Test the model inference after training
     """
-    
     model = joblib.load("./starter/model/model.pkl")
-    
     train, test = train_test_split(data, test_size=0.20)
-    
     X_train, y_train, encoder, lb = process_data(
         train, categorical_features=cat_features, label="salary", training=True
     )
-    
     X_test, y_test, _, _ = process_data(
         test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
     )
-    
     y_pred = inference(model, X_test)
-    
     assert len(y_test) == len(y_pred)
+    
