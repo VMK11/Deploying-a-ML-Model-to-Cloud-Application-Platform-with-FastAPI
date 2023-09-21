@@ -79,20 +79,38 @@ def test_say_welcome():
 
 def test_predict_error_case():
     """
-        Test model predict with error case
+    Test the model's prediction endpoint for specific error cases.
+
+    This test case sends a request with a predefined set of data that
+    lacks certain key attributes. It then checks the response for:
+    1. A non-200 status code, indicating an error or non-standard response.
+    2. Absence of specific attributes ("age", "education_num", "race", 
+       "sex", and "native_country") in the JSON response, which are expected 
+       to be missing or not returned by the server.
+
+    Attributes:
+        data_test (dict): The test data used for the prediction request.
+        respone (Response): The server's response to the POST request.
+
+    Assertions:
+        1. The response status code is not 200.
+        2. Certain keys are missing in the returned JSON response.
+
+    Raises:
+        AssertionError: If any of the assertions fail.
     """
     data_test = {
-                "workclass": "Private",
-                "fnlgt": 59496,
-                "education": "Bachelors",
-                "education_num": 13,
-                "marital_status": "Married-civ-spouse",
-                "occupation": "Sales",
-                "relationship": "Husband",
-                "capital_gain": 2407,
-                "capital_loss": 0,
-                "hours_per_week": 40,
-            }
+        "workclass": "Private",
+        "fnlgt": 59496,
+        "education": "Bachelors",
+        "education_num": 13,
+        "marital_status": "Married-civ-spouse",
+        "occupation": "Sales",
+        "relationship": "Husband",
+        "capital_gain": 2407,
+        "capital_loss": 0,
+        "hours_per_week": 40,
+    }
     respone = client.post('/predict', json=data_test)
     assert respone.status_code != 200
     assert "age" not in respone.json()
@@ -100,3 +118,29 @@ def test_predict_error_case():
     assert "race" not in respone.json()
     assert "sex" not in respone.json()
     assert "native_country" not in respone.json()
+
+def test_predict_happy_case_2():
+    """
+        Test model predict with happy case >= 50K
+    """
+    data_test = {
+                "age": 32,
+                "workclass": "Private",
+                "fnlgt": 29933,
+                "education": "Bachelors",
+                "education_num": 13,
+                "marital_status": "Married-civ-spouse",
+                "occupation": "Handlers-cleaners",
+                "relationship": "Husband",
+                "race": "White",
+                "sex": "Male",
+                "capital_gain": 0,
+                "capital_loss": 0,
+                "hours_per_week": 50,
+                "native_country": "United-States"
+            }
+    respone = client.post('/predict', json=data_test)
+    # Check response code
+    assert respone.status_code == 200
+    # Check response predict results of the model
+    assert respone.json() == ">50K" 
