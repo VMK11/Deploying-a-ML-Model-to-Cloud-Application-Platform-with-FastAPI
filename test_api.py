@@ -119,7 +119,7 @@ def test_predict_error_case():
     assert "sex" not in respone.json()
     assert "native_country" not in respone.json()
 
-def test_predict_happy_case_2():
+def test_predict_above_50k():
     """
         Test model predict with happy case >= 50K
     """
@@ -143,4 +143,30 @@ def test_predict_happy_case_2():
     # Check response code
     assert respone.status_code == 200
     # Check response predict results of the model
-    assert respone.json() == ">50K" 
+    assert respone.json() == ">50K"
+
+def test_predict_below_50k():
+    """
+        Test model predict with happy case <= 50K
+    """
+    data_test = {
+                "age": 30,
+                "workclass": "Private",
+                "fnlgt": 59496,
+                "education": "Bachelors",
+                "education_num": 13,
+                "marital_status": "Married-civ-spouse",
+                "occupation": "Sales",
+                "relationship": "Husband",
+                "race": "White",
+                "sex": "Male",
+                "capital_gain": 2407,
+                "capital_loss": 0,
+                "hours_per_week": 40,
+                "native_country": "United-States"
+            }
+    respone = client.post('/predict', json=data_test)
+    # Check response code
+    assert respone.status_code == 200
+    # Check response predict results of the model
+    assert respone.json() == "<=50K" 
