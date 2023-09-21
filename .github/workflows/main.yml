@@ -2,6 +2,9 @@ name: Python CICD
 
 on:
   push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
   workflow_dispatch:  # This line adds the manual trigger
 
 permissions:
