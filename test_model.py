@@ -71,7 +71,7 @@ def test_model_output(data):
     """
         Test the model inference after training
     """
-    model = joblib.load(MODEL_PATH + "model.pkl")
+    model = joblib.load("./starter/model/model.pkl")
     train, test = train_test_split(data, test_size=0.20)
     X_train, y_train, encoder, lb = process_data(
         train, categorical_features=cat_features, label="salary", training=True
