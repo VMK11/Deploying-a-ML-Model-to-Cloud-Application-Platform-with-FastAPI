@@ -66,25 +66,25 @@ def test_process_data(data):
     assert len(X_train) + len(X_test) == len(data)
 
 
-# def test_inference(data):
-#     """
-#     Description:
-#         Test the `inference` function to ensure it makes predictions as expected.
+def test_inference(data):
+    """
+    Description:
+        Test the `inference` function to ensure it makes predictions as expected.
     
-#     Parameters:
-#         data (pandas.DataFrame): Loaded census data.
+    Parameters:
+        data (pandas.DataFrame): Loaded census data.
     
-#     Returns:
-#         None. Asserts are used to validate the inference.
-#     """
-#     model = joblib.load('./starter/model/model.pkl')
-#     train, test = train_test_split(data, test_size=0.3, random_state=0)
-#     # Process data
-#     X_train, y_train, encoder, lb = process_data(
-#         train, categorical_features=cat_features, label="salary", training=True
-#     )
-#     X_test, y_test, _, _ = process_data(
-#         test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
-#     )
-#     y_preds = inference(model, X_test)
-#     assert len(y_preds) == len(test)
+    Returns:
+        None. Asserts are used to validate the inference.
+    """
+    model = joblib.load('./starter/model/model.pkl')
+    train, test = train_test_split(data, test_size=0.3, random_state=0)
+    # Process data
+    X_train, y_train, encoder, lb = process_data(
+        train, categorical_features=cat_features, label="salary", training=True
+    )
+    X_test, y_test, _, _ = process_data(
+        test, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+    )
+    y_preds = inference(model, X_test)
+    assert len(y_preds) == len(test)
